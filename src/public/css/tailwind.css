@@ -1,0 +1,61 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    /* Styles de base pour tous les boutons */
+    .btn {
+        @apply inline-flex items-center justify-center px-4 py-2 
+               border border-transparent text-sm font-medium rounded-md
+               focus:outline-none focus:ring-2 focus:ring-offset-2
+               transition-colors duration-200;
+    }
+
+    /* Bouton primaire (vert) */
+    .btn-primary {
+        @apply btn bg-green-600 text-white 
+               hover:bg-green-700 
+               focus:ring-green-500;
+    }
+
+    /* Bouton secondaire (gris) */
+    .btn-secondary {
+        @apply btn bg-gray-600 text-white 
+               hover:bg-gray-700 
+               focus:ring-gray-500;
+    }
+
+    /* Bouton danger (rouge) */
+    .btn-danger {
+        @apply btn bg-red-600 text-white 
+               hover:bg-red-700 
+               focus:ring-red-500;
+    }
+
+    /* Bouton outline */
+    .btn-outline {
+        @apply btn border-gray-300 bg-white text-gray-700 
+               hover:bg-gray-50 
+               focus:ring-primary-500;
+    }
+
+    /* Bouton de petite taille */
+    .btn-sm {
+        @apply px-3 py-1.5 text-xs;
+    }
+
+    /* Bouton de grande taille */
+    .btn-lg {
+        @apply px-6 py-3 text-base;
+    }
+
+    /* Bouton pleine largeur */
+    .btn-block {
+        @apply w-full;
+    }
+
+    /* Bouton désactivé */
+    .btn-disabled {
+        @apply opacity-50 cursor-not-allowed;
+    }
+}

@@ -1,0 +1,47 @@
+{
+  "name": "task_manager_app",
+  "version": "1.0.0",
+  "description": "A basic task manager application with intentional vulnerabilities for educational purposes",
+  "main": "app.js",
+  "scripts": {
+    "start": "node --watch app.js",
+    "dev": "nodemon app.js",
+    "docker-start": "docker compose up",
+    "test": "jest",
+    "test:models": "jest src/tests/models",
+    "test:routes": "jest src/tests/routes",
+    "tailwind:css": "postcss public/css/tailwind.css -o public/css/styles.css",
+    "test:e2e": "cypress run && node utils/cleanupTestData.js"
+  },
+  "dependencies": {
+    "@tailwindcss/aspect-ratio": "^0.4.2",
+    "@tailwindcss/forms": "^0.5.7",
+    "@tailwindcss/typography": "^0.5.10",
+    "autoprefixer": "^10.4.17",
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.2",
+    "dotenv": "^16.4.6",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "jsdom": "^25.0.1",
+    "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.9.2",
+    "nodemon": "^3.1.7",
+    "postcss": "^8.4.35",
+    "postcss-cli": "^11.0.0",
+    "sqlite3": "^5.1.6",
+    "superagent": "^10.1.1",
+    "tailwindcss": "^3.4.16"
+  },
+  "devDependencies": {
+    "cypress": "^13.16.1",
+    "cypress-dotenv": "^2.0.0",
+    "jest": "^29.7.0",
+    "sinon": "^19.0.2",
+    "supertest": "^7.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

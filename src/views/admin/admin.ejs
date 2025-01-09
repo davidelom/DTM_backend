@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="bg-gray-50">
+    <%- include('../layouts/header') %>
+
+
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">Utilisateurs</h2>
+
+            <% if (locals.error) { %>
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg mb-6">
+                    <%= error %>
+                </div>
+            <% } %>
+
+            <div class="space-y-4">
+                <% users.forEach(user => { %>
+                    <div class="bg-gray-50 p-4 rounded-lg border border-gray-200 hover:border-green-500 transition-colors duration-200">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-4 flex-1">
+                                <div class="flex-1">
+                                    <h3 class="text-lg font-semibold%>">
+                                        <%= user.username %>
+                                    </h3>
+                                    <p class="text-gray-600 mt-1">
+                                        <%= user.email %>
+                                    </p>
+                                    <p class="text-gray-500 mt-1">
+                                        Rôles : 
+                                        <%= Array.isArray(user.roles) ? user.roles.join(', ') : user.roles %>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="flex space-x-2">
+                                <a href="/admin/user/edit/<%= user.id %>" 
+                                    class="btn btn-secondary btn-sm">
+                                    Modifier
+                                </a>
+                                <a href="#" 
+                                    onclick="deleteUser(<%= user.id %>); return false;" 
+                                    class="px-3 py-2 text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                                    Supprimer
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+        </div>
+    </main>
+    <script>
+        function deleteUser(userId) {
+            if (!confirm('Êtes-vous sûr de vouloir supprimer cette tâche ?')) {
+                return;
+            }
+    
+            fetch(`/admin/user/${userId}`, {
+                method: 'DELETE',
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erreur lors de la suppression de l\'utilisateur');
+                }
+                window.location.reload(); // Recharge la page pour afficher la liste mise à jour
+            })
+            .catch(error => {
+                console.error('Erreur:', error);
+                alert('Erreur lors de la suppression de l\'utilisateur');
+            });
+        }
+    </script>
+    <%- include('../layouts/footer') %>
+</body>
+</html>
+
