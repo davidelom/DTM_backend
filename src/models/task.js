@@ -1,9 +1,16 @@
+const { get } = require('superagent');
 const pool = require('../config/db');
 
 const Task = {
     getAllByUser: async (userId) => {
         const query = 'SELECT * FROM tasks WHERE user_id = ?';
         const [rows] = await pool.execute(query, [userId]);
+        return rows;
+    },
+
+    getAllTasks: async () => {
+        const query = 'SELECT * FROM tasks';
+        const [rows] = await pool.execute(query);
         return rows;
     },
 

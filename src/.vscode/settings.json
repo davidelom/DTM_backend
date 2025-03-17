@@ -1,0 +1,14 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "server": "51.159.26.58",
+            "port": 1390,
+            "driver": "PostgreSQL",
+            "name": "Dev DB",
+            "database": "rdb",
+            "username": "dave",
+            "password": "DAVE@thaink2*"
+        }
+    ]
+}

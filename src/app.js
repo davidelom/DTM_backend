@@ -4,9 +4,15 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const path = require('path');
+const cors = require('cors');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
+
+app.use(cors({
+  origin: process.env.FRONTEND_URL || 'http://localhost:3000', 
+  credentials: true, 
+}));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -23,20 +29,13 @@ app.use(session({
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-// View engine setup
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
-
-// Models
-const db = require('./config/db');
-
 const taskCounter = require('./middlewares/taskCount');
 
 // Routes
 const authRoutes = require('./routes/auth');
 const taskRoutes = require('./routes/tasks');
 const adminRoutes = require('./routes/admin');
+const apiRoutes = require('./routes/api')
 
 app.get('/', taskCounter, (req, res) => {
     res.render('index', { 
@@ -47,6 +46,7 @@ app.get('/', taskCounter, (req, res) => {
 app.use('/', authRoutes);
 app.use('/tasks', taskRoutes);
 app.use('/admin', adminRoutes);
+app.use('/api/tasks', apiRoutes);
 
 
 if (process.env.NODE_ENV !== 'test') {
